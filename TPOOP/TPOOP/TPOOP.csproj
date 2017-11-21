@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Empleados\Personal.cs" />
+    <Compile Include="Empleados\Supervisor.cs" />
+    <Compile Include="Empleados\Empleados.cs" />
+    <Compile Include="Empleados\Sup.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
