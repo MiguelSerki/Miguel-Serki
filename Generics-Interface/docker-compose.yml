@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  generics-interface:
-    image: generics-interface
-    build:
-      context: .\Generics-Interface
-      dockerfile: Dockerfile

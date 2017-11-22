@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TPOOP.Empleados
 {
-    class Supervisor : Sup
+    interface IBuilderEmpleados
     {
-
+        decimal CalcularAntiguedad();
+        decimal CalcularHorasTrabajadas();
+        decimal CalcularSueldo();
     }
 }

@@ -6,13 +6,25 @@ using System.Threading.Tasks;
 
 namespace TPOOP.Empleados
 {
-    class Empleados 
+    public abstract class Empleados : IBuilderEmpleados
     {
-        private List<Personal> ListaEmpleados = new List<Personal>();
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public int Ingreso { get; set; }
+        public int Dni { get; set; }
+        public decimal PrecioHora { get; set; }
+        public int HorasTrabajadas { get; set; }
+        public decimal SueldoBase { get; set; }
+        public double TasaAntiguedad { get; set; }
 
-        public static void Metodo<T>(T x)
+
+        public decimal CalcularHorasTrabajadas()
         {
-
+            return this.PrecioHora * this.HorasTrabajadas;
         }
+
+        public abstract decimal CalcularAntiguedad();
+        public abstract decimal CalcularSueldo ();
+
     }
 }

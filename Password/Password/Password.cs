@@ -23,7 +23,7 @@ Crear una app de consola que permita el ingreso al usuario de una longitud para 
     class Password
     {
         private int Longitud { get; set; }
-        private string Clave { get; set; }
+        private string Pass { get; set; }
 
         public Password(int longitud = 8)
         {
@@ -31,19 +31,23 @@ Crear una app de consola que permita el ingreso al usuario de una longitud para 
         }
 
 
-        public void ClaveBool (bool generar)
+        public void Clave (bool generar)
         {
 
-            foreach (char n in Clave)
-            {
-               // if(Clave.IndexOf(n) is int)
-            }
+
         }
         public bool EsFuerte()
         {
-            if (Clave.Length == 0)
+            if (Pass.Length == 0)
             {
                 Console.WriteLine("No tienes clave todavia");
+            }
+            else
+            {
+                foreach (char n in this.Pass)
+                {
+                    // if(Clave.IndexOf(n) is int)
+                }
             }
 
             return false;
