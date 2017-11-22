@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{13E78A1F-F381-495F-ADCE-E1A0087CA50F}</ProjectGuid>
+    <ProjectGuid>{805152D1-E928-4351-93BD-7E3342548562}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Day5</RootNamespace>
-    <AssemblyName>Day5</AssemblyName>
+    <RootNamespace>Generics_Interface</RootNamespace>
+    <AssemblyName>Generics-Interface</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,10 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Cliente.cs" />
-    <Compile Include="Compania.cs" />
-    <Compile Include="Interfaz.cs" />
+    <Compile Include="Ejercicio23\E23.cs" />
+    <Compile Include="Ejercicio24\Ejercicio24.cs" />
+    <Compile Include="Ejercicio25\E25.cs" />
+    <Compile Include="Ejercicio26\E26.cs" />
+    <Compile Include="Ejercicio27\E27.cs" />
+    <Compile Include="Ejercicio29\ClaseContenedor.cs" />
+    <Compile Include="Ejercicio29\Contenedor.cs" />
+    <Compile Include="Ejercicio30\E30.cs" />
+    <Compile Include="Ejercicio30\IE30.cs" />
+    <Compile Include="Ejercicio31\Transporte.cs" />
+    <Compile Include="Ejercicio31\Vehiculo.cs" />
+    <Compile Include="Ejercicio31\Voladores.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
