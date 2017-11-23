@@ -15,14 +15,11 @@ namespace TPOOP.Empleados
         public decimal PrecioHora { get; set; }
         public int HorasTrabajadas { get; set; }
         public decimal SueldoBase { get; set; }
-        public double TasaAntiguedad { get; set; }
-
 
         public decimal CalcularHorasTrabajadas()
         {
             return this.PrecioHora * this.HorasTrabajadas;
         }
-
         public abstract decimal CalcularAntiguedad();
         public abstract decimal CalcularSueldo ();
 

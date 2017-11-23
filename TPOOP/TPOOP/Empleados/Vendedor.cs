@@ -11,13 +11,13 @@ namespace TPOOP.Empleados
         public override decimal CalcularAntiguedad()
         {
 
-            if ((this.Ingreso - DateTime.Today.Year) > 5)
-            {
-                return (this.CalcularHorasTrabajadas() * 2.5m) / 100;
-            }
-            else if ((this.Ingreso - DateTime.Today.Year) > 10)
+            if ((DateTime.Today.Year - this.Ingreso) > 10)
             {
                 return (this.CalcularHorasTrabajadas() * 5m) / 100;
+            }
+            else if ((DateTime.Today.Year - this.Ingreso) > 5)
+            {
+                return (this.CalcularHorasTrabajadas() * 2.5m) / 100;
             }
             else
             {
@@ -28,7 +28,8 @@ namespace TPOOP.Empleados
 
         public override decimal CalcularSueldo()
         {
-            throw new NotImplementedException();
+            decimal Total = this.SueldoBase + this.CalcularAntiguedad()+ this.CalcularHorasTrabajadas();
+            return Total;
         }
     }
 }
