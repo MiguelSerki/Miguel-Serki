@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TPOOP.Empleados
+namespace ConsoleApp
 {
-    public interface ISupervisor
+    class Program
     {
-        string Categoria { get; set; }
-        decimal CalcularComision();
+        static void Main(string[] args)
+        {
+        }
     }
 }

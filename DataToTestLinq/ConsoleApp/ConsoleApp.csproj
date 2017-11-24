@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{659085DD-942E-4CA8-8CB0-3AB03D9C1BC0}</ProjectGuid>
+    <ProjectGuid>{C76BCE83-0F74-4870-BAC8-48D853DC9FBD}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TPOOP</RootNamespace>
-    <AssemblyName>TPOOP</AssemblyName>
+    <RootNamespace>ConsoleApp</RootNamespace>
+    <AssemblyName>ConsoleApp</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,13 +30,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,24 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datos\Empleados\Empleados.cs" />
-    <Compile Include="Datos\Empleados\IEmpleados.cs" />
-    <Compile Include="Datos\Listas de empleados\IListaEmpleados.cs" />
-    <Compile Include="Datos\Empleados\ISupervisor.cs" />
-    <Compile Include="Datos\Listas de empleados\ListaEmpleados.cs" />
-    <Compile Include="Datos\Empleados\Supervisor.cs" />
-    <Compile Include="Datos\Empleados\Vendedor.cs" />
-    <Compile Include="Datos\Listas de empleados\ListaVendedores.cs" />
-    <Compile Include="Negocios\Director.cs" />
-    <Compile Include="Negocios\EmpleadoBuilder.cs" />
-    <Compile Include="Negocios\EmpleadosFactory.cs" />
-    <Compile Include="Negocios\IEmpleadoBuilder.cs" />
-    <Compile Include="Presentacion\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

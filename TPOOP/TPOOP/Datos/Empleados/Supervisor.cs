@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TPOOP.Empleados
+namespace TPOOP.Datos
 {
     public class Supervisor : Empleados, ISupervisor
     {

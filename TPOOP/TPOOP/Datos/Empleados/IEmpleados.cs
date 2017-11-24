@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TPOOP.Empleados
+namespace TPOOP.Datos
 {
     public interface IEmpleados
     {
@@ -12,7 +12,7 @@ namespace TPOOP.Empleados
         string Nombre { get; set; }
         string Apellido { get; set; }
         int Ingreso { get; set; }
-        int Dni { get; set; }
+        string Dni { get; set; }
         decimal PrecioHora { get; set; }
         int HorasTrabajadas { get; set; }
         decimal SueldoBase { get; set; }

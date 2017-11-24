@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TPOOP.Empleados;
+using TPOOP.Datos;
 
-namespace TPOOP.Empresa
+namespace TPOOP.Negocios
 {
     public class EmpleadosFactory
     {
-        public static IEmpleados GetEmpleado <T>( string tipo) where T :IEmpleados
+        public static IEmpleados GetEmpleado( string tipo)
         {
             switch (tipo.ToLower())
             {

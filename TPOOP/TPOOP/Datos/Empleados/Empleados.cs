@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TPOOP.Empleados
+namespace TPOOP.Datos
 {
     public abstract class Empleados : IEmpleados
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public int Ingreso { get; set; }
-        public int Dni { get; set; }
+        public string Dni { get; set; }
         public decimal PrecioHora { get; set; }
         public int HorasTrabajadas { get; set; }
         public decimal SueldoBase { get; set; }
