@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataToTestLinq;
 
 namespace Day8
 {
@@ -11,16 +11,16 @@ namespace Day8
     {
         /*A partir del objeto DataContext del proyecto DataToTestLinq, 
          * realizar las siguientes consultas. 
-        - Listar todas las personas mostrando nombre, país y edad. *
-        - Listar las mujeres. 
-        - Listar los hombres que pesen más de 70KG. 
-        - Promedio de edad de las personas de la lista, sin incluir a sus hijos. 
+        + Listar todas las personas mostrando nombre, país y edad. *
+        + Listar las mujeres. 
+        + Listar los hombres que pesen más de 70KG. 
+        + Promedio de edad de las personas de la lista, sin incluir a sus hijos. 
         - Listar los hijos de cada persona. 
-        - Promedio de edad por país. 
-        - Promedio de peso por género. 
-        - Persona con mayor peso. 
-        - Persona con menor peso. 
-        - Última persona de la lista. 
+        + Promedio de edad por país. 
+        + Promedio de peso por género. 
+        + Persona con mayor peso. 
+        + Persona con menor peso. 
+        - Última persona de la lista.
         - Listar personas que hablan más de un idioma mostrando el nombre y los idiomas que habla. 
         - Promedio de edad de los hijos de cada persona. 
         - Consultar si existe alguna persona llamada “Osvaldo”. 
@@ -28,123 +28,53 @@ namespace Day8
 */
         static void Main(string[] args)
         {
+
             Console.WriteLine("Todas las personas");
-            foreach (var item in TodasLasPersonas())
+            foreach (var item in Servicios.TodasLasPersonas())
             {
                 Console.WriteLine("Nombre: {0}, Pais: {1}, Edad: {2}", item.Name, item.Country, item.Age);
             }
+            Salto();
             Console.WriteLine("Todas las mujeres");
-            foreach (var item in Mujeres())
+            foreach (var item in Servicios.Mujeres())
             {
                 Console.WriteLine("Nombre: {0}", item.Name);
             }
-
+            Salto();
             Console.WriteLine("Personas que pesan mas de 70");
-            foreach (var item in Pesos())
+            foreach (var item in Servicios.Pesos())
             {
                 Console.WriteLine("Nombre: {0}, Peso: {1}", item.Name, item.Weight);
             }
-
+            Salto();
             Console.WriteLine("Promedio de edades de todas las personas");
-            Promedio();
+            Console.WriteLine(Servicios.Promedio());
+            Salto();
             Console.WriteLine("Promedio Por paises");
-
-            foreach (var item in PromedioPaises())
+            foreach (var item in Servicios.PromedioPaises())
             {
-                Console.WriteLine("Pais: {0}, Promedio {1}", item);
+                Console.WriteLine("Pais: {0}, Promedio {1}", item.Name, item.Avg);
             }
+            Salto();
+            Console.WriteLine("Promedio de pesos por genero");
+            foreach (var item in Servicios.PesosPorGenero())
+            {
+                Console.WriteLine("Genero: {0}, Peso: {1}", item.Gender, item.Avg);
+            }
+            Salto();
 
-
+            var x = Servicios.LaMasPesada();
+            Console.WriteLine("La persona mas pesada es {0}, con {1} kilos", x.Name, x.Weight);
+            Salto();
+            var y = Servicios.LaMenosPesada();
+            Console.WriteLine("La persona menos pesada es {0}, con {1} kilos", y.Name, y.Weight);
+            Salto();
             Console.ReadLine();
         }
 
-        public static IEnumerable<PersonModel> TodasLasPersonas()
+        public static void Salto()
         {
-            return DataContext.People.Select(person => new PersonModel
-            {
-                Name = person.Name,
-                Country = person.Country,
-                Age = DateTime.Today.Year - person.DateOfBorn.Year
-            }).Union(DataContext.People
-                .Where(person => person.Children.Count() != 0)
-                .SelectMany(person => person.Children)
-                .Select(child => new PersonModel
-                {
-                    Name = child.Name,
-                    Country = child.Country,
-                    Age = DateTime.Today.Year - child.DateOfBorn.Year
-                }));
+            Console.WriteLine("=============================");
         }
-        public static IEnumerable<PersonName> Mujeres()
-        {
-            return DataContext.People
-                .Where(person => person.Gender == Gender.Feminine)
-                .Select(person => new PersonName
-            {
-                Name = person.Name,
-            }).Union(DataContext.People
-                .Where(person => person.Children.Count() != 0)
-                .SelectMany(person => person.Children)
-                .Where(child => child.Gender == Gender.Feminine)
-                .Select(child => new PersonName
-                {
-                    Name = child.Name,
-                }));
-        }
-        public static IEnumerable<PersonWeight> Pesos()
-        {
-            return DataContext.People
-                .Where(person => person.Weight >70)
-                .Select(person => new PersonWeight
-            {
-                Name = person.Name,
-                Weight = person.Weight
-            }).Union(DataContext.People
-        .Where(person => person.Children.Count() != 0)
-        .SelectMany(person => person.Children)
-        .Where(child => child.Weight > 70)
-        .Select(child => new PersonWeight
-        {
-            Name = child.Name,
-            Weight = child.Weight
-        }));
-        }
-        public static void Promedio()
-        {
-            var x = DataContext.People
-                .Select(person => DateTime.Now.Year - person.DateOfBorn.Year)
-                .Average();
-            Console.WriteLine($"El total es {x}");
-        }
-        public static IEnumerable<object> PromedioPaises()
-        {
-            var x = DataContext.People
-                .GroupBy(person => person.Country)
-                .Select(y => new
-                { Country = y.Key,
-                  Avg = y.Select( z => DateTime.Now.Year - z.DateOfBorn.Year).Average()
-                }
-                    );
-            return x;
-        }
-
     }
-        public class PersonModel
-        {
-            public string Name { get; set; }
-            public string Country { get; set; }
-            public int Age { get; set; }
-        }
-
-        public class PersonName
-        {
-            public string Name { get; set; }
-        }
-        
-    public class PersonWeight
-    {
-        public string Name { get; set; }
-        public decimal Weight { get; set; }
-    }
-    
 }

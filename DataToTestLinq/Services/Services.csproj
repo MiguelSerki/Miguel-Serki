@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3A89C235-FCDF-4DB1-AA0D-CEFE2A30D4EE}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Day8</RootNamespace>
-    <AssemblyName>Day8</AssemblyName>
+    <ProjectGuid>{A0832493-108D-4AB8-BEA9-523FBE12D06A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Services</RootNamespace>
+    <AssemblyName>Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,14 +31,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataToTestLinq">
-      <HintPath>..\..\DataToTestLinq\DataToTestLinq\bin\Debug\DataToTestLinq.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,11 +45,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Models\CountryModel.cs" />
+    <Compile Include="Models\PersonModel.cs" />
+    <Compile Include="Models\PersonName.cs" />
+    <Compile Include="Models\PersonWeight.cs" />
+    <Compile Include="Models\WeightModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataToTestLinq\DataToTestLinq.csproj">
+      <Project>{9841fd25-99ed-4bfa-8e0e-6ff5a72d75ce}</Project>
+      <Name>DataToTestLinq</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
