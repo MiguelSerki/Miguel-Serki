@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace TPOOP.Empleados
 {
-    interface IBuilderEmpleados
+    public interface ISupervisor
     {
-        decimal CalcularAntiguedad();
-        decimal CalcularHorasTrabajadas();
-        decimal CalcularSueldo();
+        string Categoria { get; set; }
+        decimal CalcularComision();
     }
 }

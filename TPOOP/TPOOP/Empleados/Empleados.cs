@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TPOOP.Empleados
 {
-    public abstract class Empleados : IBuilderEmpleados
+    public abstract class Empleados : IEmpleados
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
