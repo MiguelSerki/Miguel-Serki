@@ -16,6 +16,7 @@ namespace TPOOP.Negocios
         void SetPrecioHora();
         void SetHorastrabajadas();
         void SetSueldoBase();
+        void SetEmpleado(IEmpleados empleado);
         IEmpleados GetEmpleado();
     }
 }

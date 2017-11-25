@@ -7,7 +7,7 @@ using TPOOP.Datos;
 
 namespace TPOOP.Negocios
 {
-    public class Director
+    public class Director <T> where T : IEmpleados
     {
         private EmpleadoBuilder Builder;
 
@@ -16,8 +16,9 @@ namespace TPOOP.Negocios
             this.Builder = builder;
         }
 
-        public void ConstructEmpleado()
+        public void ConstructEmpleado(IEmpleados empleado)
         {
+            this.Builder.SetEmpleado(empleado);
             this.Builder.SetNombre();
             this.Builder.SetApellido();
             this.Builder.SetDni();
@@ -27,9 +28,11 @@ namespace TPOOP.Negocios
             this.Builder.SetSueldoBase();
         }
 
-        public IEmpleados GetEmpleados()
+        public T GetEmpleados()
         {
             return this.Builder.GetEmpleado();
         }
+
+        public List<T> 
     }
 }

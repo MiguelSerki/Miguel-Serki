@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace TPOOP.Datos
 {
-    public class ListaEmpleados : IListaEmpleados
+    public class ListaEmpleados
     {
-        private List<IEmpleados> Lista { get; set; }
+        private List<IEmpleados> Lista { get; set; } = new List<IEmpleados>();
+
         public IEmpleados GetEmpleado(string Dni)
         {
             try
             {
-              var x = Lista.Where(e => e.Dni == Dni).Single();
+              var x = this.Lista.Where(e => e.Dni == Dni).Single();
               return x;
             }
             catch (Exception)
@@ -22,19 +23,45 @@ namespace TPOOP.Datos
                 return null;
             }
         }
-        public IEmpleados MejoresPago()
+        public  List<IEmpleados> MejoresPago(List<IEmpleados> lista)
         {
             IEmpleados x;
+            IEmpleados y;
+            List<IEmpleados> z = null;
             try
             {
-             x = Lista.OrderByDescending(e => e.CalcularSueldo()).First();
+                x = this.Lista.Where(e=> e is Vendedor)
+                              .OrderByDescending(e => e.CalcularSueldo())
+                              .First();
             }
             catch (Exception)
             {
                 Console.WriteLine("La lista de empleados esta vacia");
-                return null;
+                x = null;
             }
-            return x;
+            try
+            {
+                y = this.Lista.Where(e => e is Supervisor)
+                              .OrderByDescending(e => e.CalcularSueldo())
+                              .First();
+
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("La lista de empleados esta vacia");
+                y = null;
+            }
+            z.Add(x);
+            z.Add(y);
+            return z;
+        }
+        public void AddEmpleado(IEmpleados empleado)
+        {
+            this.Lista.Add(empleado);
+        }
+        public void RemoveEmpleado (IEmpleados empleado)
+        {
+            this.Lista.Remove(empleado);
         }
     }
 }

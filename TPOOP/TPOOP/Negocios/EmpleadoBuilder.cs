@@ -10,10 +10,6 @@ namespace TPOOP.Negocios
     public class EmpleadoBuilder : IEmpleadoBuilder
     {
         private IEmpleados Empleado;
-        public EmpleadoBuilder(IEmpleados empleado)
-        {
-            this.Empleado = empleado;
-        }
 
         public void SetApellido()
         {
@@ -36,7 +32,11 @@ namespace TPOOP.Negocios
         public void SetIngreso()
         {
             Console.WriteLine("Año de ingreso");
+            Console.WriteLine("Debe ser un año valido");
+            while(this.Empleado.Ingreso > DateTime.Now.Year)
+            {
             this.Empleado.Ingreso = (int)CheckNumber();
+            } 
         }
 
         public void SetNombre()
@@ -56,6 +56,11 @@ namespace TPOOP.Negocios
             if (this.Empleado is Vendedor)
                 this.Empleado.Ingreso = 2000;
             this.Empleado.Ingreso = 4000;
+        }
+
+        public void SetEmpleado(IEmpleados empleado)
+        {
+            this.Empleado = empleado;
         }
 
         private static decimal CheckNumber()

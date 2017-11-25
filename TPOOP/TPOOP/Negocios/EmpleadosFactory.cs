@@ -7,7 +7,7 @@ using TPOOP.Datos;
 
 namespace TPOOP.Negocios
 {
-    public class EmpleadosFactory
+    public static class EmpleadosFactory
     {
         public static IEmpleados GetEmpleado( string tipo)
         {
@@ -20,7 +20,6 @@ namespace TPOOP.Negocios
                 default:
                     Console.WriteLine("Algo horrible ha pasado mientras construiamos tu empleado!");
                     return default;
-                
             }
         }
     }

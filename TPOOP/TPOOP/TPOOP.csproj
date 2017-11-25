@@ -48,12 +48,10 @@
   <ItemGroup>
     <Compile Include="Datos\Empleados\Empleados.cs" />
     <Compile Include="Datos\Empleados\IEmpleados.cs" />
-    <Compile Include="Datos\Listas de empleados\IListaEmpleados.cs" />
     <Compile Include="Datos\Empleados\ISupervisor.cs" />
     <Compile Include="Datos\Listas de empleados\ListaEmpleados.cs" />
     <Compile Include="Datos\Empleados\Supervisor.cs" />
     <Compile Include="Datos\Empleados\Vendedor.cs" />
-    <Compile Include="Datos\Listas de empleados\ListaVendedores.cs" />
     <Compile Include="Negocios\Director.cs" />
     <Compile Include="Negocios\EmpleadoBuilder.cs" />
     <Compile Include="Negocios\EmpleadosFactory.cs" />
