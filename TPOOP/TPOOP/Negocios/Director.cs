@@ -9,14 +9,16 @@ namespace TPOOP.Negocios
 {
     public class Director <T> where T : IEmpleados
     {
-        private EmpleadoBuilder Builder;
+        private EmpleadoBuilder<T> Builder;
+        private ListaEmpleados Lista;
 
-        public Director(EmpleadoBuilder builder)
+        public Director(EmpleadoBuilder<T> builder)
         {
             this.Builder = builder;
+            this.Lista = new ListaEmpleados();
         }
 
-        public void ConstructEmpleado(IEmpleados empleado)
+        public void ConstructEmpleado(T empleado)
         {
             this.Builder.SetEmpleado(empleado);
             this.Builder.SetNombre();
@@ -33,6 +35,9 @@ namespace TPOOP.Negocios
             return this.Builder.GetEmpleado();
         }
 
-        public List<T> 
+        public List<T> ListEmpleados()
+        {
+            return null;
+        }
     }
 }

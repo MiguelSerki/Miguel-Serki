@@ -7,7 +7,7 @@ using TPOOP.Datos;
 
 namespace TPOOP.Negocios
 {
-    interface IEmpleadoBuilder
+    interface IEmpleadoBuilder <T> where T :IEmpleados
     {
         void SetNombre();
         void SetApellido();
@@ -16,7 +16,7 @@ namespace TPOOP.Negocios
         void SetPrecioHora();
         void SetHorastrabajadas();
         void SetSueldoBase();
-        void SetEmpleado(IEmpleados empleado);
-        IEmpleados GetEmpleado();
+        void SetEmpleado(T empleado);
+        T GetEmpleado();
     }
 }

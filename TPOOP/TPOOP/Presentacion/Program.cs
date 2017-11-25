@@ -12,8 +12,7 @@ namespace TPOOP
         static void Main(string[] args)
         {
             Console.WriteLine("Bienvenido/a al programa");
-            var Builder = new EmpleadoBuilder();
-            var Director = new Director(Builder);
+            var Facade = new Facade();
             string key;
             do
             {

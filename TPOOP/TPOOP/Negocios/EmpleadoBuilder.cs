@@ -7,9 +7,9 @@ using TPOOP.Datos;
 
 namespace TPOOP.Negocios
 {
-    public class EmpleadoBuilder : IEmpleadoBuilder
+    public class EmpleadoBuilder <T>: IEmpleadoBuilder <T> where T : IEmpleados
     {
-        private IEmpleados Empleado;
+        private T Empleado;
 
         public void SetApellido()
         {
@@ -58,7 +58,7 @@ namespace TPOOP.Negocios
             this.Empleado.Ingreso = 4000;
         }
 
-        public void SetEmpleado(IEmpleados empleado)
+        public void SetEmpleado(T empleado)
         {
             this.Empleado = empleado;
         }
@@ -75,7 +75,7 @@ namespace TPOOP.Negocios
             return y;
         }
 
-        public IEmpleados GetEmpleado()
+        public T GetEmpleado()
         {
             return this.Empleado;
         }
