@@ -33,10 +33,10 @@ namespace TPOOP.Negocios
         {
             Console.WriteLine("Año de ingreso");
             Console.WriteLine("Debe ser un año valido");
-            while(this.Empleado.Ingreso > DateTime.Now.Year)
+            do
             {
-            this.Empleado.Ingreso = (int)CheckNumber();
-            } 
+              this.Empleado.Ingreso = (int)CheckNumber();
+            } while (this.Empleado.Ingreso > DateTime.Now.Year);
         }
 
         public void SetNombre()
