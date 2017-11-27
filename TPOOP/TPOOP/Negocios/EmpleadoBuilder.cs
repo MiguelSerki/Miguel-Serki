@@ -9,58 +9,52 @@ namespace TPOOP.Negocios
 {
     public class EmpleadoBuilder <T>: IEmpleadoBuilder <T> where T : IEmpleados
     {
-        private T Empleado;
 
-        public void SetApellido()
+        public void SetApellido(T Empleado)
         {
            Console.WriteLine("Apellido:");
-           this.Empleado.Apellido = Console.ReadLine();
+           Empleado.Apellido = Console.ReadLine();
         }
 
-        public void SetDni()
+        public void SetDni(T Empleado)
         {
             Console.WriteLine("Dni: ");
-            this.Empleado.Dni = Console.ReadLine();
+            Empleado.Dni = Console.ReadLine();
         }
 
-        public void SetHorastrabajadas()
+        public void SetHorastrabajadas(T Empleado)
         {
             Console.WriteLine("Horas trabajadas");
-            this.Empleado.HorasTrabajadas = (int)CheckNumber();
+            Empleado.HorasTrabajadas = (int)CheckNumber();
         }
 
-        public void SetIngreso()
+        public void SetIngreso(T Empleado)
         {
             Console.WriteLine("Año de ingreso");
             Console.WriteLine("Debe ser un año valido");
             do
             {
-              this.Empleado.Ingreso = (int)CheckNumber();
-            } while (this.Empleado.Ingreso > DateTime.Now.Year);
+              Empleado.Ingreso = (int)CheckNumber();
+            } while (Empleado.Ingreso > DateTime.Now.Year);
         }
 
-        public void SetNombre()
+        public void SetNombre(T Empleado)
         {
             Console.WriteLine("Nombre:");
-            this.Empleado.Nombre = Console.ReadLine();
+            Empleado.Nombre = Console.ReadLine();
         }
 
-        public void SetPrecioHora()
+        public void SetPrecioHora(T Empleado)
         {
             Console.WriteLine("Precio por hora trabajada");
-            this.Empleado.PrecioHora = CheckNumber();
+            Empleado.PrecioHora = CheckNumber();
         }
 
-        public void SetSueldoBase()
+        public void SetSueldoBase(T Empleado)
         {
-            if (this.Empleado is Vendedor)
-                this.Empleado.Ingreso = 2000;
-            this.Empleado.Ingreso = 4000;
-        }
-
-        public void SetEmpleado(T empleado)
-        {
-            this.Empleado = empleado;
+            if (Empleado is Vendedor)
+                Empleado.Ingreso = 2000;
+            Empleado.Ingreso = 4000;
         }
 
         private static decimal CheckNumber()
@@ -73,11 +67,6 @@ namespace TPOOP.Negocios
                 x = Console.ReadLine();
             } while (!decimal.TryParse(x, out y));
             return y;
-        }
-
-        public T GetEmpleado()
-        {
-            return this.Empleado;
         }
     }
 }

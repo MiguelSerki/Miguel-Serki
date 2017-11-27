@@ -9,14 +9,12 @@ namespace TPOOP.Negocios
 {
     interface IEmpleadoBuilder <T> where T :IEmpleados
     {
-        void SetNombre();
-        void SetApellido();
-        void SetIngreso();
-        void SetDni();
-        void SetPrecioHora();
-        void SetHorastrabajadas();
-        void SetSueldoBase();
-        void SetEmpleado(T empleado);
-        T GetEmpleado();
+        void SetNombre(T Empleado);
+        void SetApellido(T Empleado);
+        void SetIngreso(T Empleado);
+        void SetDni(T Empleado);
+        void SetPrecioHora(T Empleado);
+        void SetHorastrabajadas(T Empleado);
+        void SetSueldoBase(T Empleado);
     }
 }

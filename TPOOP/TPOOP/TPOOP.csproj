@@ -57,6 +57,7 @@
     <Compile Include="Negocios\EmpleadosFactory.cs" />
     <Compile Include="Negocios\Facade.cs" />
     <Compile Include="Negocios\IEmpleadoBuilder.cs" />
+    <Compile Include="Negocios\SupervisorBuilder.cs" />
     <Compile Include="Presentacion\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

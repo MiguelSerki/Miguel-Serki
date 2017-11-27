@@ -10,14 +10,11 @@ namespace TPOOP.Datos
     {
         private List<IEmpleados> Lista = new List<IEmpleados>();
 
-        public void AddEmpleado(IEmpleados empleado)
+        public void AddToLista( IEmpleados empleado)
         {
             this.Lista.Add(empleado);
         }
-        public void RemoveEmpleado (IEmpleados empleado)
-        {
-            this.Lista.Remove(empleado);
-        }
+
         public List<IEmpleados> GetLista()
         {
             return this.Lista;

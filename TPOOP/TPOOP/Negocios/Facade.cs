@@ -10,12 +10,14 @@ namespace TPOOP.Negocios
     public class Facade
     {
         private Director<IEmpleados> Director;
-        private EmpleadoBuilder<IEmpleados> Builder;
+        private EmpleadoBuilder<IEmpleados> EmpleadosBuilder;
+        private SupervisorBuilder<ISupervisor> SupervisorBuilder;
 
         public Facade()
         {
-            this.Builder = new EmpleadoBuilder<IEmpleados>();
-            this.Director = new Director<IEmpleados>(this.Builder);
+            this.EmpleadosBuilder = new EmpleadoBuilder<IEmpleados>();
+            this.SupervisorBuilder = new SupervisorBuilder<ISupervisor>();
+            this.Director = new Director<IEmpleados>(this.EmpleadosBuilder, this.SupervisorBuilder);
         }
 
         public void OptionA(string dato)
@@ -44,7 +46,9 @@ namespace TPOOP.Negocios
         }
         public void OptionC(string dato)
         {
-            this.Director.ConstructEmpleado(EmpleadosFactory.GetEmpleado(dato));
+
+
+            this.Director.ConstructEmpleado(EmpleadosFactory.GetEmpleado(dato), dato);
         }
         public void OptionL()
         {

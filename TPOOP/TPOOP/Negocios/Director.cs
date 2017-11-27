@@ -9,31 +9,44 @@ namespace TPOOP.Negocios
 {
     public class Director <T> where T : IEmpleados
     {
-        private EmpleadoBuilder<T> Builder;
+        private EmpleadoBuilder<T> EmpleadoBuilder;
+        private SupervisorBuilder<ISupervisor> SupervisorBuilder;
         private ListaEmpleados Lista;
 
-        public Director(EmpleadoBuilder<T> builder)
+        public Director(EmpleadoBuilder<T> builder, SupervisorBuilder<ISupervisor> supervisor)
         {
-            this.Builder = builder;
+            this.EmpleadoBuilder = builder;
+            this.SupervisorBuilder = supervisor;
             this.Lista = new ListaEmpleados();
         }
 
-        public void ConstructEmpleado(T empleado)
+        public void ConstructEmpleado(T empleado, string key)
         {
-            this.Builder.SetEmpleado(empleado);
-            this.Builder.SetNombre();
-            this.Builder.SetApellido();
-            this.Builder.SetDni();
-            this.Builder.SetIngreso();
-            this.Builder.SetPrecioHora();
-            this.Builder.SetHorastrabajadas();
-            this.Builder.SetSueldoBase();
-            this.Lista.AddEmpleado(empleado);
-        }
 
-        public T GetEmpleados()
-        {
-            return this.Builder.GetEmpleado();
+            if (key.ToLower() == "v")
+            {
+                this.EmpleadoBuilder.SetNombre(empleado);
+                this.EmpleadoBuilder.SetApellido(empleado);
+                this.EmpleadoBuilder.SetDni(empleado);
+                this.EmpleadoBuilder.SetIngreso(empleado);
+                this.EmpleadoBuilder.SetPrecioHora(empleado);
+                this.EmpleadoBuilder.SetHorastrabajadas(empleado);
+                this.EmpleadoBuilder.SetSueldoBase(empleado);
+                this.Lista.GetLista().Add(empleado);
+            }
+            else
+            {
+                this.SupervisorBuilder.SetNombre((ISupervisor)empleado);
+                this.SupervisorBuilder.SetApellido((ISupervisor)empleado);
+                this.SupervisorBuilder.SetDni((ISupervisor)empleado);
+                this.SupervisorBuilder.SetIngreso((ISupervisor)empleado);
+                this.SupervisorBuilder.SetPrecioHora((ISupervisor)empleado);
+                this.SupervisorBuilder.SetHorastrabajadas((ISupervisor)empleado);
+                this.SupervisorBuilder.SetSueldoBase((ISupervisor)empleado);
+                this.SupervisorBuilder.SetCategoria((ISupervisor)empleado);
+                this.Lista.AddToLista(empleado);
+            }
+
         }
 
         public List<IEmpleados> ListEmpleados()
@@ -45,7 +58,7 @@ namespace TPOOP.Negocios
         {
             IEmpleados x;
             IEmpleados y;
-            List<IEmpleados> z = null;
+            List<IEmpleados> z = new List<IEmpleados>();
             try
             {
                 x = this.Lista.GetLista().Where(e => e is Vendedor)

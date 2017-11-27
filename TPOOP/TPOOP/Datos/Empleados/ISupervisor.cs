@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TPOOP.Datos
 {
-    public interface ISupervisor
+    public interface ISupervisor : IEmpleados
     {
         string Categoria { get; set; }
         decimal CalcularComision();
