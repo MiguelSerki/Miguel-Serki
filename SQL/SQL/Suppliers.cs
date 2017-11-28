@@ -51,7 +51,6 @@ namespace SQL
         [Column(TypeName = "ntext")]
         public string HomePage { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Products> Products { get; set; }
     }
 }
