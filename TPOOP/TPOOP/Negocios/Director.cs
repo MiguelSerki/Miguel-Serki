@@ -76,7 +76,6 @@ namespace TPOOP.Negocios
                               .OrderByDescending(e => e.CalcularSueldo())
                               .First();
                 z.Add(y);
-
             }
             catch (Exception)
             {
