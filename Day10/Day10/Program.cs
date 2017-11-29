@@ -22,18 +22,28 @@ namespace Day10
                 {
                     case "c":
                         var customer = facade.Create();
+
                         Console.WriteLine("Ingrese un nombre:");
                         customer.ContactName = Console.ReadLine();
+
                         Console.WriteLine("Ingrese una ciudad:");
                         customer.City = Console.ReadLine();
+
                         customer.CustomerID = facade.CheckId();
+
+                        Console.WriteLine("Ingrese el nombre de la compania");
+                        customer.CompanyName = Console.ReadLine();
+
                         facade.AddCustomer(customer);
                         break;
                     case "r":
+                        facade.Read();
                         break;
                     case "u":
+                        facade.Update();
                         break;
                     case "d":
+                        facade.Delete();
                         break;
                     case "e":
                         Console.WriteLine("Vuelva prontos :)");

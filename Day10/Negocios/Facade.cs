@@ -9,17 +9,16 @@ namespace Negocios
 {
     public class Facade
     {
-        private CustomerRepository Repository = new CustomerRepository();
+        private Repository<Customers> Repository = new Repository<Customers>();
+        private CustomerRepository Rep = new CustomerRepository();
 
         public string CheckId()
         {
             string key;
-       //     bool x;
             do
             {
                 Console.WriteLine("Ingrese un codigo de ID (max 5 char)");
                 key = Console.ReadLine().ToUpper();
-               // x = key.Length > 0 && key.Length <= 5;
             } while (key.Length == 0 || key.Length > 5);
             return key;
         }
@@ -31,11 +30,50 @@ namespace Negocios
 
         public void AddCustomer(CustomerDTO customer)
         {
-           var Customer = Repository.CreateCustomer();
+           var Customer = Rep.CreateCustomer();
             Customer.City = customer.City;
             Customer.ContactName = customer.ContactName;
             Customer.CustomerID = customer.CustomerID;
-            Repository.AddCustomer(Customer);
+            Customer.CompanyName = customer.CompanyName;
+            Repository.Persist(Customer);
+        }
+
+        public void Read()
+        {
+            var key = CheckId();
+            try
+            {
+                var customer = Repository.GetCustomer(key);
+                Console.WriteLine($"Nombre: {customer.ContactTitle} {customer.ContactName}, " +
+                    $"Ciudad: {customer.City}," +
+                    $" Direccion: {customer.City}");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Ingrese un ID valido.");
+            }
+        }
+
+        public void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update()
+        {
+            var key = CheckId();
+            try
+            {
+                var customer = Repository.GetCustomer(key);
+                Console.WriteLine("Ingrese un nuevo nombre");
+                customer.ContactName = Console.ReadLine();
+                customer.CustomerID = CheckId();
+                Repository.UpdateCustomer();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Ingrese un ID valido.");
+            }
         }
     }
 

@@ -28,15 +28,14 @@ namespace Datos
                 context.SaveChanges();
             }
         }
-        public void UpdateCustomer (Customers customer)
+        public void UpdateCustomer ()
         {
             using (var context = new NorthwindEntities())
             {
-                
-
+                context.SaveChanges();
             }
         }
-        public Customers getCustomer (string ID)
+        public Customers GetCustomer (string ID)
         {
             using (var context = new NorthwindEntities())
             {

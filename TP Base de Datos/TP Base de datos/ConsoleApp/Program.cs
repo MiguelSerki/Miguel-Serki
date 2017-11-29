@@ -21,13 +21,7 @@ namespace ConsoleApp
                 switch (key.ToLower())
                 {
                     case "c":
-                        var customer = services.Create();
-                        Console.WriteLine("Ingrese un nombre:");
-                        customer.ContactName = Console.ReadLine();
-                        Console.WriteLine("Ingrese una ciudad:");
-                        customer.City = Console.ReadLine();
-                        customer.CustomerID = services.CheckId();
-                        services.AddCustomer(customer);
+                      
                         break;
                     case "r":
                         break;
