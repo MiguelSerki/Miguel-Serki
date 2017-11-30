@@ -13,12 +13,10 @@ namespace Servicios
         public string CheckId()
         {
             string key;
-            //     bool x;
             do
             {
                 Console.WriteLine("Ingrese un codigo de ID (max 5 char)");
                 key = Console.ReadLine().ToUpper();
-                // x = key.Length > 0 && key.Length <= 5;
             } while (key.Length == 0 || key.Length > 5);
             return key;
         }
