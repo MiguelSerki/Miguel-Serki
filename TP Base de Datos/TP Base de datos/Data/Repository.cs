@@ -31,6 +31,13 @@ namespace Data
             return entity;
         }
 
+        public T GetById(int id)
+        {
+
+            return this.context.Set<T>().Find(id);
+            
+        }
+
         public IQueryable<T> Set()
         {
             return context.Set<T>();
