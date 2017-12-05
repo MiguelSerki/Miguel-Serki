@@ -7,7 +7,7 @@ namespace Data
     using System.Data.Entity.Spatial;
 
     public partial class Order
-    {/*
+    {
         public Order()
         {
             Order_Details = new HashSet<Order_Detail>();
@@ -57,5 +57,5 @@ namespace Data
         public virtual ICollection<Order_Detail> Order_Details { get; set; }
 
         public virtual Shipper Shipper { get; set; }
-   */ }
+    }
 }
