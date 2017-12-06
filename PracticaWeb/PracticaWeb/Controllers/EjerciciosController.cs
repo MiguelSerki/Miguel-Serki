@@ -50,5 +50,42 @@ namespace PracticaWeb.Controllers
             ViewBag.msg = $"Aloha {nombre}! Tu ciudad es {ciudad}";
             return View();
         }
+
+        public ActionResult Contador()
+        {
+            return View();
+        }
+
+        public ActionResult ContadorDavid()
+        {
+            var count = 1;
+            if (HttpContext.Application["count"] == null)
+            {
+                HttpContext.Application["count"] = count;
+            }
+            else
+            {
+                count = int.Parse(HttpContext.Application["count"].ToString()) + 1;
+                HttpContext.Application["count"] = count;
+            }
+
+            ViewBag.Count = count;
+
+            return View();
+        }
+
+        
+        public ActionResult Bienvenido()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Bienvenido2(string nombre)
+        {
+            ViewBag.msg = $"Bienvenido {nombre}!";
+            return View();
+        }
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace PracticaWeb
+namespace WebApp
 {
     public class FilterConfig
     {
@@ -9,7 +9,5 @@ namespace PracticaWeb
         {
             filters.Add(new HandleErrorAttribute());
         }
-
-
     }
 }
