@@ -27,8 +27,6 @@ namespace Servicios
             {
                 Order newOrder = new Order();
                 MapOrders(order, newOrder);
-                var customerRepo = new Repository<Customer>();
-                newOrder.Customer = customerRepo.Set().Where(c=> c.CustomerID == newOrder.CustomerID).FirstOrDefault();
                 Repository.Persist(newOrder);
                 Repository.SaveChanges();
                 return newOrder.OrderID;
@@ -102,11 +100,65 @@ namespace Servicios
             return total;
         }
 
-        public void ListHighestCustomer()
+        public List<BestCustomerProductByCountry> ListHighestCustomer()
         {
-            var list = new Repository<Customer>().Set().Where(e=> e is Customer);
+            var allCustomers = new Repository<Customer>().Set();
 
+            var customerList = allCustomers.GroupBy(x => x.Country)
+                .Select(x => new BestCustomerDTO
+                {
+                    CountryName = x.Key,
+                    CustomerName = x
+                        .OrderByDescending(c => c.Orders
+                        .Sum(g => g.Order_Details
+                        .Sum(d => d.Quantity * d.Product.UnitPrice)))
+                        .Select(h => h.ContactName)
+                        .FirstOrDefault(),
+                    Total = x.Select(v => v.Orders
+                        .Where(c => c.CustomerID == x
+                        .OrderByDescending(w => w.Orders
+                        .Sum(g => g.Order_Details
+                        .Sum(d => d.Quantity * d.Product.UnitPrice)))
+                        .Select(h => h.CustomerID)
+                        .FirstOrDefault())
+                        .Sum(g => g.Order_Details
+                        .Sum(d => d.Quantity * d.Product.UnitPrice)))
+                        .Sum()
+                })
+                .ToList();
 
+            var productList = allCustomers.GroupBy(x => x.Country)
+                .Select(x => new BestProductDTO
+                {
+                    CountryName = x.Key,
+                    ProductName = x 
+                    .SelectMany(c => c.Orders)
+                    .SelectMany(v => v.Order_Details)
+                    .GroupBy(b => b.ProductID)
+                    .OrderByDescending(t => t.Count())
+                    .FirstOrDefault()
+                    .Select(b => b.Product.ProductName)
+                    .FirstOrDefault()
+                })
+                .ToList();
+
+            var data = new List<BestCustomerProductByCountry>();
+
+            foreach (var product in productList)
+                foreach (var customer in customerList)
+                    if (product.CountryName == customer.CountryName)
+                    {
+                        var item = new BestCustomerProductByCountry()
+                        {
+                            CountryName = product.CountryName,
+                            CustomerName = customer.CustomerName,
+                            ProductName = product.ProductName,
+                            Total = (decimal)customer.Total
+                        };
+
+                        data.Add(item);
+                    }
+            return data;
         }
 
         public OrderDTO Read(int id)
@@ -118,9 +170,8 @@ namespace Servicios
                 ReverseMap(orderDTO, order);
                 return orderDTO;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e.Message);
                 return null;
             }
         }
@@ -184,18 +235,22 @@ namespace Servicios
             order.ShipRegion = dto.ShipRegion;
             order.ShipVia = dto.ShipVia;
 
-            foreach (var item in dto.Order_Details)
+            if(dto.Order_Details != null)
             {
-                order.Order_Details.Add(new Order_Detail
+                foreach (var item in dto.Order_Details)
                 {
-                    OrderID = order.OrderID,
-                    ProductID = item.ProductID,
-                    Order = order,
-                    Quantity = item.Quantity,
-                    UnitPrice = (decimal)item.UnitPrice,
-                    Discount = item.Discount,
-                });
+                    order.Order_Details.Add(new Order_Detail
+                    {
+                        OrderID = order.OrderID,
+                        ProductID = item.ProductID,
+                        Order = order,
+                        Quantity = item.Quantity,
+                        UnitPrice = (decimal)item.UnitPrice,
+                        Discount = item.Discount,
+                    });
+                }
             }
+           
         }
 
         public void ReverseMap(OrderDTO dto, Order order)
@@ -203,7 +258,7 @@ namespace Servicios
             dto.CustomerID = order.CustomerID;
             dto.EmployeeID = order.EmployeeID;
             dto.Freight = order.Freight;
-            dto.OrderDate = order.OrderDate;
+            dto.OrderDate = (DateTime)order.OrderDate;
             dto.OrderID = order.OrderID;
             dto.RequiredDate = order.RequiredDate;
             dto.ShipAddress = order.ShipAddress;
@@ -226,6 +281,40 @@ namespace Servicios
                     Discount = item.Discount,
                 });
             }
+        }
+
+        public int DoesOrderExist(int id)
+        {
+            try
+            {
+                return Repository.GetById(id).OrderID;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("No existe esa orden");
+                return -1;
+            }
+        }
+
+        public int UpdateOrder(OrderDTO order)
+        {
+            try
+            {
+                var updateOrder = this.Repository.GetById(order.OrderID);
+
+                this.MapOrders(order, updateOrder);
+
+                this.Repository.Update(updateOrder);
+
+                this.Repository.SaveChanges();
+
+                return 0;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+
         }
     }
 }

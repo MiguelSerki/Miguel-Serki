@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Servicios;
+using System.Globalization;
 
 namespace ConsoleApp
 {
@@ -28,8 +29,7 @@ namespace ConsoleApp
                         try
                         {
                             var order = services.Read(CheckId());
-                            Console.WriteLine($"ID: {order.OrderID} Fecha: {order.OrderDate.Value.ToShortDateString()} ShipAddress: {order.ShipAddress} City: {order.ShipCity} Country: {order.ShipCountry} Name: {order.ShipName}");
-
+                            Console.WriteLine($"ID: {order.OrderID} Fecha: {order.OrderDate.ToShortDateString()} ShipAddress: {order.ShipAddress} City: {order.ShipCity} Country: {order.ShipCountry} Name: {order.ShipName}");
                         }
                         catch (Exception)
                         {
@@ -37,7 +37,8 @@ namespace ConsoleApp
                         }
                         break;
                     case "u":
-                        Update();
+                        var updateOrder = services.Create();
+                        Update(updateOrder, services);
                         break;
                     case "d":
                         services.Delete(CheckId());
@@ -46,7 +47,11 @@ namespace ConsoleApp
                         ListAll(services.ListOrderDTO());
                         break;
                     case "m":
-                        services.ListHighestCustomer();//arreglar
+                        var customerAndProductList = services.ListHighestCustomer();
+                        foreach (var item in customerAndProductList)
+                        {
+                            Console.WriteLine($"Pais: {item.CountryName}, Comprador: {item.CustomerName}, Producto: {item.ProductName}, Total: {item.Total}");
+                        }
                         break;
                     case "e":
                         Console.WriteLine("Vuelva prontos :)");
@@ -62,8 +67,6 @@ namespace ConsoleApp
 
         private static void CreateOrder(OrderDTO order, Services service)
         {
-            Console.WriteLine("DATOS DE PRUEBA:");//<----- BORRARRRRRRR
-            Console.WriteLine("ALFKI - Davolio - Nancy - chai - tofu"); //<----- BORRARRRRRRR
             do
             {
                 Console.Write("Ingrese el nombre del empleado: ");
@@ -192,13 +195,90 @@ namespace ConsoleApp
             }
         }
 
-        public static void Update()
+        public static void Update(OrderDTO order, Services service)
         {
-            Console.Write("Ingrese la fecha en el siguiente formato dd-mm-yyyy: ");
+            var existOrder = service.DoesOrderExist(CheckId());
+            
+            if (existOrder != -1)
+            {
+                order.OrderID = existOrder;
+                do
+                {
+                    Console.Write("Ingrese el nombre del empleado: ");
+                    var nombreEmpleado = Console.ReadLine();
 
-            DateTime date;
-            DateTime.TryParse(Console.ReadLine(), out date); //VALIDAR FORMATO DE LA FECHA!!!
-                                                             // nuevaOrder.RequiredDate = date;
+                    Console.Write("Ingrese el apellido del empleado: ");
+                    var apellidoEmpleado = Console.ReadLine();
+
+                    var empoyeeID = service.ExistByName(nombreEmpleado, apellidoEmpleado);
+
+                    if (empoyeeID != -1)
+                    {
+                        order.EmployeeID = empoyeeID;
+                    }
+                    else
+                    {
+                        Console.WriteLine("No existe tal empleado, intente de nuevo");
+                    }
+
+                } while (order.EmployeeID == null);
+
+                bool exist;
+                do
+                {
+                    Console.WriteLine("Ingrese el ID del comprador: ");
+                    var compradorId = Console.ReadLine().ToUpper();
+                    exist = service.SearchCustomerByID(compradorId);
+                    order.CustomerID = compradorId;
+                } while (!exist);
+
+                var datePattern = "dd-mm-yyyy";
+
+                Console.Write("Ingrese la fecha en formato dd-mm-yyyy: ");
+                do
+                {
+                    var date = Console.ReadLine();
+
+                    if (DateTime.TryParseExact(date, datePattern, null,
+                        DateTimeStyles.None, out DateTime parsedDate))
+                        order.OrderDate = parsedDate;
+                    else
+                        Console.WriteLine("Fecha invalida, intente de nuevo");
+                } while (order.OrderDate == null);
+
+
+
+
+                Console.Write("Ingrese el nombre del envío: ");
+                order.ShipName = Console.ReadLine();
+
+                Console.Write("Ingrese la direccion de destino: ");
+                order.ShipAddress = Console.ReadLine();
+
+                Console.Write("Ingrese la ciudad de destino: ");
+                order.ShipCity = Console.ReadLine();
+
+                Console.Write("Ingrese la region de destino: ");
+                order.ShipRegion = Console.ReadLine();
+
+                Console.Write("Ingrese el codigo postal de destino: ");
+                order.ShipPostalCode = Console.ReadLine();
+
+                Console.Write("Ingrese el pais de destino: ");
+                order.ShipCountry = Console.ReadLine();
+
+                
+                if (service.UpdateOrder(order) != -1)
+                    Console.WriteLine($"La Orden ID: {order.OrderID} se ha actualziado exitosamente.");
+                else
+                    Console.WriteLine("Algo fallo mientras actualizabamos su orden");
+
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Intente de nuevo");
+            }
         }
 
         public static int CheckId()
