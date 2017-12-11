@@ -14,7 +14,11 @@ namespace Servicios
 
         public int? EmployeeID { get; set; }
 
+<<<<<<< HEAD
         public DateTime? OrderDate { get; set; }
+=======
+        public DateTime OrderDate { get; set; }
+>>>>>>> 15876affaf1662ac1f545ccf553a4517cb72a383
 
         public DateTime? RequiredDate { get; set; }
 

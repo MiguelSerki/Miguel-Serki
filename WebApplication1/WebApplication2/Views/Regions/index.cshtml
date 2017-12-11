@@ -1,0 +1,18 @@
+﻿@model List<WebApplication2.Region>
+@{
+    ViewBag.Title = "Regions";
+}
+
+<h2>Regions</h2>
+
+<table>
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.RegionID</td>
+            <td>@item.RegionDescription</td> 
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<form action="/User/Delete" method="post">
+    <div>
+        <h3>Nombre del usuario</h3>
+        <input type="text" name="Name" />
+    </div>
+    <div>
+        <button type="submit">Enviar</button>
+    </div>
+</form>
+
+<h1>@ViewBag.msg</h1>

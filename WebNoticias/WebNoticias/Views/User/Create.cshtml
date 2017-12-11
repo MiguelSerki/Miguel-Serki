@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<form action="/User/Create" method="post">
+    <div>
+        <h3>Nombre</h3>
+        <input type="text" name="Name" />
+    </div>
+    <div>
+        <h3>Password</h3>
+        <input type="password" name="Password" />
+    </div>
+    <div>
+        <button type="submit">Enviar</button>
+    </div>
+</form>
+<h1>@ViewBag.msg</h1>
