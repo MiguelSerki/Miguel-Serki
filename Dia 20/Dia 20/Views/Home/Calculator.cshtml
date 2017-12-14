@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Calculator";
+}
+
+<h2>Calculator</h2>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CALQIULEEIIITOOORRR</title>
+</head>
+<body>
+    <div class="form-group">
+        <label for="sel1">Select list:</label>
+        <select class="form-control" id="sel1">
+            <option>Suma</option>
+            <option>Resta</option>
+            <option>Multiplicacion</option>
+            <option>Division</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <tag>Primer numero</tag>
+        <input class="form-group" type="number" id="a" />
+    </div>
+    <div class="form-group">
+        <tag>Segundo numero</tag>
+        <input class="form-group"  type="number" id="b" />
+    </div>
+    <div>
+        <button id="btn"class="btn-success" >Calcular</button>
+    </div>
+    <div class="form-group">
+        <tag>Resulado</tag>
+        <input class="form-group" type="number" id="c" readonly/>
+    </div>
+
+    <script>
+        var a = document.getElementById("a");
+        var b = document.getElementById("b");
+        var c = document.getElementById("c");
+        var dropdown = document.getElementById("sel1");
+
+        function Suma(a, b) {
+            return (parseInt (a) + parseInt(b));
+        }
+        function Resta(a, b) {
+            return (parseInt(a) - parseInt(b));
+        }
+        function Multiplicacion(a, b) {
+            return (parseInt(a) * parseInt(b));
+        }
+        function Division(a, b) {
+            return (parseInt(a) / parseInt(b));
+        }
+
+        function DeterminarOperacion() {
+            switch (dropdown.value) {
+                case "Suma":
+                    c.value = Suma(a.value, b.value)
+                    return true
+                case "Resta":
+                    c.value = Resta(a.value, b.value)
+                    return true
+                case "Multiplicacion":
+                    c.value = Multiplicacion(a.value, b.value)
+                    return true
+                case "Division":
+                    if (b.value == 0)
+                        return false
+                    c.value = Division(a.value, b.value)
+                    return true
+                default:
+                    return false;
+            }
+        }
+
+        document.getElementById("btn").onclick = function () { 
+            return DeterminarOperacion();
+        }
+    </script>
+</body>
+</html>

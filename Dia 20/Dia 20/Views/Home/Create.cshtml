@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Crear usuario</title>
+</head>
+<body>
+    <form action="/Home/Create" method="post">
+        <div>
+            <label>Nombre</label>
+            <input id="txtName" type="text" name="Name" />
+            <span id="spanName" style="color : red"></span>
+        </div>
+        <div>
+            <label>Apellido</label>
+            <input id="txtSurname" type="text" name="Surname" />
+            <span id="spanSurname"  style="color : red"></span>
+        </div>
+        <div>
+            <label>Edad</label>
+            <input id="numberAge" type="number" name="Age" />
+            <span id="spanAge" style="color : red"></span>
+        </div>
+        <div>
+            <button id="btn" class="btn-success" type="submit">Ingresar</button>
+        </div>
+    </form>
+
+    <script>
+        var txtname = document.getElementById("txtName");
+        var txtsurname = document.getElementById("txtSurname");
+        var numberage = document.getElementById("numberAge");
+        var spanName = document.getElementById("spanName");
+        var spanSurname = document.getElementById("spanSurname");
+        var spanAge = document.getElementById("spanAge");
+        spanName.innerHTML = "";
+        spanSurname.innerHTML = "";
+        spanAge.innerHTML = "";
+        function nolomojes() {
+            if (txtname.value == "") {
+                spanName.innerHTML = "Error";
+                return false
+            }
+            else if (txtsurname.value == "") {
+                spanName.innerHTML = "";
+                spanSurname.innerHTML = "Error";
+                return false
+            }
+            else if (numberage.value == "") {
+                spanName.innerHTML = "";
+                spanSurname.innerHTML = "";
+                spanAge.innerHTML = "Error";
+                return false
+            }
+            else if (txtname.value.length > 50 || txtsurname.value.lengh > 50) {
+                spanName.innerHTML = "Error";
+                spanSurname.innerHTML = "Error";
+                return txtname.value == txtsurname.value
+            }
+            else if (numerage.value >= 13 ) {
+                spanName.innerHTML = "";
+                spanSurname.innerHTML = "";
+                spanAge.innerHTML = "Error";
+                return false
+            }
+            else {
+                return true
+            }
+        }
+
+
+        document.getElementById("btn").onclick = function () { return nolomojes() };
+
+    </script>
+</body>
+</html>
